@@ -3,11 +3,12 @@
 #include <stdlib.h>
 
 int teste(){
-  
+    printf("OI\n");
 }
 
 int main(){
 
+  teste();
 
   return 0;
 }
