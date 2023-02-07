@@ -4,6 +4,7 @@
 
 int teste(){
     printf("OI\n");
+     printf("OI\n");
 }
 
 int main(){
