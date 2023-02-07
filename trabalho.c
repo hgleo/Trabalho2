@@ -43,6 +43,10 @@ struct veiculo cadastroVeiculo(){
   return veiculo;
 }
 
+void pesquisa(struct veiculo veiculo[], int n){
+
+
+}
 void removeVeiculo(){
 
 }
@@ -80,6 +84,10 @@ int main(){
     break;
 
     case 3:
+    break;
+
+    case 0:
+      exit(0);
     break;
    } 
 
