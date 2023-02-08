@@ -7,6 +7,8 @@
 typedef struct {
   char modelo[20];
   char placa[7];
+  int valor;
+  int ano;
   int alugado;
 } Carro;
 
@@ -21,9 +23,13 @@ void cadastrar_carro() {
   }
 
   printf("Informe o modelo do carro: ");
-  scanf("%20[^\n]", carros[quantidade_carros].modelo);
+  scanf("%s", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
-  scanf("%7[^\n]", carros[quantidade_carros].placa);
+  scanf("%s", carros[quantidade_carros].placa);
+  printf("Informe o ano do carro: ");
+  scanf("%d", carros[quantidade_carros].ano);
+  printf("Informe o valor do carro: ");
+  scanf("%d", carros[quantidade_carros].valor);
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
