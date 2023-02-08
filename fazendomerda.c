@@ -5,8 +5,8 @@
 #define MAX_CARROS 100
 
 typedef struct {
-  char modelo[50];
-  char placa[10];
+  char modelo[20];
+  char placa[7];
   int alugado;
 } Carro;
 
@@ -21,9 +21,9 @@ void cadastrar_carro() {
   }
 
   printf("Informe o modelo do carro: ");
-  scanf("%s", carros[quantidade_carros].modelo);
+  scanf("%20[\n]", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
-  scanf("%s", carros[quantidade_carros].placa);
+  scanf("%7[\n]", carros[quantidade_carros].placa);
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
