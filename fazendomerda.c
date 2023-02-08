@@ -81,7 +81,6 @@ void apagar_carro() {
     printf("Carro apagado com sucesso!\n");
     return;
     }
-
 }
 
 int main() {
