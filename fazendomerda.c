@@ -46,19 +46,11 @@ void cadastrar_carro() {
   scanf("%s", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
   scanf("%s", carros[quantidade_carros].placa);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> db729f74803da8cae12f9c4a0f8e3a588ca235b1
+
   printf("Informe o ano do carro: ");
   scanf("%d", &carros[quantidade_carros].ano);
   printf("Informe o valor do carro: ");
   scanf("%d", &carros[quantidade_carros].valor);
-<<<<<<< HEAD
->>>>>>> db729f74803da8cae12f9c4a0f8e3a588ca235b1
-=======
->>>>>>> db729f74803da8cae12f9c4a0f8e3a588ca235b1
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
