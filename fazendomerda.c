@@ -21,9 +21,9 @@ void cadastrar_carro() {
   }
 
   printf("Informe o modelo do carro: ");
-  scanf("%20[\n]", carros[quantidade_carros].modelo);
+  scanf("%20[^\n]", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
-  scanf("%7[\n]", carros[quantidade_carros].placa);
+  scanf("%7[^\n]", carros[quantidade_carros].placa);
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
