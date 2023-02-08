@@ -22,8 +22,11 @@
 #define MAX_CARROS 100
 
 typedef struct {
+  char marca[20];
   char modelo[20];
   char placa[7];
+  int ano;
+  int valor;
   int alugado;
 } Carro;
 
@@ -37,10 +40,19 @@ void cadastrar_carro() {
     return;
   }
 
+  printf("Digite a marca do carro: ");
+  scanf("%s", carros[quantidade_carros].marca);
   printf("Informe o modelo do carro: ");
   scanf("%s", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
   scanf("%s", carros[quantidade_carros].placa);
+<<<<<<< HEAD
+=======
+  printf("Informe o ano do carro: ");
+  scanf("%d", &carros[quantidade_carros].ano);
+  printf("Informe o valor do carro: ");
+  scanf("%d", &carros[quantidade_carros].valor);
+>>>>>>> db729f74803da8cae12f9c4a0f8e3a588ca235b1
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
@@ -55,8 +67,11 @@ void exibir_carros() {
   printf("Carros disponíveis: \n");
   for (int i = 0; i < quantidade_carros; i++) {
     if (!carros[i].alugado) {
+      printf("Marca: %s\n", carros[i].marca);
       printf("Modelo: %s\n", carros[i].modelo);
       printf("Placa: %s\n", carros[i].placa);
+      printf("Ano: %d\n", carros[i].ano);
+      printf("Valor: %d\n", carros[i].valor);
       printf("\n");
     }
   }
@@ -98,7 +113,6 @@ void apagar_carro() {
     printf("Carro apagado com sucesso!\n");
     return;
     }
-
 }
 
 int main() {
