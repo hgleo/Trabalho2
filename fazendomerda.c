@@ -2,95 +2,126 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 100
+#define MAX_CARROS 100
 
-struct Carro {
-    char marca[50];
-    char placa[50];
-    int ano;
-    int alugado;
-};
+typedef struct {
+  char modelo[50];
+  char placa[10];
+  int alugado;
+} Carro;
 
-int main() {
-    int numCarros = 0;
-    struct Carro *carro = malloc(MAX * sizeof(struct Carro));
+int quantidade_carros = 0;
+Carro *carros;
 
-    while (1) {
-        printf("1. Adicionar carro\n");
-        printf("2. Alugar carro\n");
-        printf("3. Devolver carro\n");
-        printf("4. Listar carros disponíveis\n");
-        printf("5. Sair\n");
-        printf("\nSelecione uma opção: ");
+void cadastrar_carro() {
+  carros = (Carro *) realloc(carros, (quantidade_carros + 1) * sizeof(Carro));
+  if (carros == NULL) {
+    printf("Não foi possível alocar memória para o novo carro.\n");
+    return;
+  }
 
-        int opc;
-        scanf("%d", &opc);
+  printf("Informe o modelo do carro: ");
+  scanf("%s", carros[quantidade_carros].modelo);
+  printf("Informe a placa do carro: ");
+  scanf("%s", carros[quantidade_carros].placa);
+  carros[quantidade_carros].alugado = 0;
+  quantidade_carros++;
+  printf("Carro cadastrado com sucesso!\n");
+}
 
-        if (opc == 1) {
-            if (numCarros == MAX) {
-                printf("Não é possível adicionar mais carros. Aumente o tamanho do vetor.\n");
-                continue;
-            }
+void exibir_carros() {
+  if (quantidade_carros == 0) {
+    printf("Não há carros disponíveis.\n");
+    return;
+  }
 
-            printf("Marca: ");
-            scanf("%s", carro[numCarros].marca);
+  printf("Carros disponíveis: \n");
+  for (int i = 0; i < quantidade_carros; i++) {
+    if (!carros[i].alugado) {
+      printf("Modelo: %s\n", carros[i].modelo);
+      printf("Placa: %s\n", carros[i].placa);
+      printf("\n");
+    }
+  }
+}
 
-            printf("Placa: ");
-            scanf("%s", carro[numCarros].placa);
+void alugar_carro() {
+  char modelo[50];
+  printf("Informe o modelo do carro que deseja alugar: ");
+  scanf("%s", modelo);
 
-            printf("Ano: ");
-            scanf("%d", &carro[numCarros].ano);
+  for (int i = 0; i < quantidade_carros; i++) {
+    if (!carros[i].alugado && strcmp(carros[i].modelo, modelo) == 0) {
+      carros[i].alugado = 1;
+      printf("Carro alugado com sucesso!\n");
+      return;
+    }
+  }
 
-            carro[numCarros].alugado = 0;
-            numCarros++;
-        } else if (opc == 2) {
-            char marca[50];
-            printf("Marca do carro a ser alugado: ");
-            scanf("%s", marca);
+  printf("Não foi possível alugar o carro informado.\n");
+}
 
-            int i;
-            for (i = 0; i < numCarros; i++) {
-                if (!strcmp(carro[i].marca, marca) && !carro[i].alugado) {
-                    carro[i].alugado = 1;
-                    printf("Carro alugado com sucesso!\n");
-                    break;
-                }
-            }
+void apagar_carro() {
+  char modelo[50];
+  printf("Informe o modelo do carro que deseja alugar: ");
+  scanf("%s", modelo);
 
-            if (i == numCarros) {
-                printf("Carro não disponível para aluguel.\n");
-            }
-        } else if (opc == 3) {
-            char marca[50];
-            printf("Marca do carro a ser devolvido: ");
-            scanf("%s", marca);
-
-            int i;
-            for (i = 0; i < numCarros; i++) {
-                if (!strcmp(carro[i].marca, marca) && carro[i].alugado) {
-                    carro[i].alugado = 0;
-                    printf("Carro devolvido com sucesso!\n");
-                    break;
-                }
-            }
-
-            if (i == numCarros) {
-                printf("Carro não encontrado ou já devolvido.\n");
-            }
-        } else if (opc == 4) {
-            printf("Carros disponíveis:\n");
-            for (int i = 0; i < numCarros; i++) {
-                if (!carro[i].alugado) {
-                    printf("Marca: %s, Placa: %s, Ano: %d\n", carro[i].marca, carro[i].placa, carro[i].ano);
-                }
-            }
-        } else if (opc == 5) {
-            break;
-        } else {
-            printf("Opção inválida. Tente novamente.\n");
-        }
+  for (int i = 0; i < quantidade_carros; i++) {
+    if (strcmp(carros[i].modelo, modelo) == 0) {
+      for (int j = i; j < quantidade_carros - 1; j++) {
+        carros[j] = carros[j + 1];
+      }
+      quantidade_carros--;
+    }
+  carros = (Carro *) realloc(carros, quantidade_carros * sizeof(Carro));
+    if (carros == NULL) {
+        printf("Não foi possível apagar o carro.\n");
+        return;
+    }
+    printf("Carro apagado com sucesso!\n");
+    return;
     }
 
-    free(carro);
-    return 0;
+}
+
+int main() {
+  int opcao = 0;
+  carros = (Carro *) malloc(MAX_CARROS * sizeof(Carro));
+  if (carros == NULL) {
+    printf("Não foi possível alocar memória para os carros.\n");
+    return 1;
+  }
+
+  while (opcao != 5) {
+    printf("Escolha uma opção: \n");
+    printf("[1]-> Cadastrar carro\n");
+    printf("[2]-> Exibir carros disponíveis\n");
+    printf("[3]-> Alugar carro\n");
+    printf("[4]-> Apagar carro\n");
+    printf("[5]-> Encerrar programa\n");
+    scanf("%d", &opcao);
+
+    switch (opcao) {
+      case 1:
+        cadastrar_carro();
+        break;
+      case 2:
+        exibir_carros();
+        break;
+      case 3:
+        alugar_carro();
+        break;
+      case 4:
+        apagar_carro();
+        break;
+      case 5:
+        break;
+      default:
+        printf("Opção inválida.\n");
+        break;
+    }
+  }
+
+  free(carros);
+  return 0;
 }
