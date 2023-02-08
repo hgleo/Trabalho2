@@ -1,3 +1,20 @@
+// Permissões vendedor
+
+//     Alocar quantidade de vagas na garagem;
+//     Realocar quantidade de vagas;
+//     Cadastrar novo carro; <- TÁ FEITO
+//     Precisará de algumas informações: preço, modelo, marca, ano, etc. <- QUISER BOTAR MAIS COLOCA
+//     Pesquisar veículo <- AJUSTAR O TOUPPER PARA PESQUISAR TUDO EM MAIÚSCULO
+//     Remover carro; <- FUNÇÃO QUE LIBERA A MEMÓRIA DE TODOS OS PONTEIROS + O DA STRUCT
+//     Checar quantidade de clientes, e seus nomes;
+//     Permissões comprador:
+//     Comprar carro;
+//     Alugar carro;
+//     Ir embora (Encerra Programa); <- TÁ FEITO
+
+// O sistema de identificação (vendedor ou comprador), será administrado por base de um banco de 
+// dados improvisado, utilizando arquivos
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
