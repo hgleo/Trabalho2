@@ -178,7 +178,6 @@ int main(){
     case 0:
       exit(0);
     break;
-   } 
-
+   }
   }while(opc != 0);
 }
