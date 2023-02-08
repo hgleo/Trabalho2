@@ -179,6 +179,6 @@ int main(){
       exit(0);
     break;
    } 
-//teste
+
   }while(opc != 0);
 }
