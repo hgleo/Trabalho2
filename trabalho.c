@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//#include <windows.h> // SLEEP
+#include <windows.h> // SLEEP
 
 // Permissões vendedor
 
@@ -72,7 +72,7 @@ void pesquisa(struct veiculo veiculo[], int n){
         }
         if(auxI == 99){
               printf("\nVEÍCULO NÃO FOI ENCONTRADO!\n");
-              //Sleep(5000);
+              Sleep(5000);
         }
     }
     if(n==2){
@@ -90,7 +90,7 @@ void pesquisa(struct veiculo veiculo[], int n){
         }
         if(auxI == 99){
               printf("\nVEÍCULO NÃO FOI ENCONTRADO!\n");
-              //Sleep(5000);
+              Sleep(5000);
         }
 
     }
@@ -110,7 +110,7 @@ void pesquisa(struct veiculo veiculo[], int n){
         }
         if(auxI == 99){
               printf("\nVEÍCULO NÃO FOI ENCONTRADO!\n");
-              //Sleep(5000);
+              Sleep(5000);
         }
 
     }
@@ -165,14 +165,13 @@ int main(){
             veiculo[cadastroNum] = cadastroVeiculo();
             cadastroNum++;
             printf("\n\nVEÍCULO CADASTRADO COM SUCESSO!");
-            //Sleep(1000);
+            Sleep(1000);
     break;
 
     case 2:
     break;
 
     case 3:
-            system("cls");
             
     break;
 
@@ -183,4 +182,3 @@ int main(){
 
   }while(opc != 0);
 }
-
