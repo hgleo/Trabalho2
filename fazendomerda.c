@@ -7,6 +7,9 @@
 typedef struct {
   char modelo[20];
   char placa[7];
+  int valor;
+  int aluguel;
+  int ano;
   int alugado;
 } Carro;
 
@@ -21,16 +24,22 @@ void cadastrar_carro() {
   }
 
   printf("Informe o modelo do carro: ");
-  scanf("%20[^\n]", carros[quantidade_carros].modelo);
+  scanf("%s", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
-  scanf("%7[^\n]", carros[quantidade_carros].placa);
+  scanf("%s", carros[quantidade_carros].placa);
+  printf("Informe o ano do carro: ");
+  scanf("%d", &carros[quantidade_carros].ano);
+  printf("Informe o valor total do carro: ");
+  scanf("%d", &carros[quantidade_carros].valor);
+  printf("Informe o valor do aluguel/mes: ");
+  scanf("%d",&carros[quantidade_carros].aluguel);
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
 }
 
 void exibir_carros() {
-  if (quantidade_carros == 0) {
+  if (quantidade_carros == 0 ) {
     printf("Não há carros disponíveis.\n");
     return;
   }
@@ -46,6 +55,7 @@ void exibir_carros() {
 }
 
 void alugar_carro() {
+  int escolha = 0;
   char modelo[50];
   printf("Informe o modelo do carro que deseja alugar: ");
   scanf("%s", modelo);
@@ -53,7 +63,12 @@ void alugar_carro() {
   for (int i = 0; i < quantidade_carros; i++) {
     if (!carros[i].alugado && strcmp(carros[i].modelo, modelo) == 0) {
       carros[i].alugado = 1;
-      printf("Carro alugado com sucesso!\n");
+      printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\ndigite 1 para sim ou 0 para não\n",carros[i].aluguel);
+      scanf("%d",&escolha);
+      if(!escolha)
+        printf("O carro não foi alugado, retornando ao menu\n");
+      else
+        printf("O carro foi alugado, parabens\n");
       return;
     }
   }
