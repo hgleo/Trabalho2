@@ -25,8 +25,9 @@ typedef struct {
   char marca[20];
   char modelo[20];
   char placa[7];
-  int ano;
   int valor;
+  int aluguel;
+  int ano;
   int alugado;
 } Carro;
 
@@ -50,13 +51,15 @@ void cadastrar_carro() {
   scanf("%d", &carros[quantidade_carros].ano);
   printf("Informe o valor do carro: ");
   scanf("%d", &carros[quantidade_carros].valor);
+  printf("Informe o valor do aluguel em reais/mes do carro: ");
+  scanf("%d", &carros[quantidade_carros].aluguel);
   carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
 }
 
 void exibir_carros() {
-  if (quantidade_carros == 0) {
+  if (quantidade_carros == 0 ) {
     printf("Não há carros disponíveis.\n");
     return;
   }
@@ -69,12 +72,14 @@ void exibir_carros() {
       printf("Placa: %s\n", carros[i].placa);
       printf("Ano: %d\n", carros[i].ano);
       printf("Valor: %d\n", carros[i].valor);
+      printf("aluguel:\n",carros[i].aluguel);
       printf("\n");
     }
   }
 }
 
 void alugar_carro() {
+  int escolha = 0;
   char modelo[50];
   printf("Informe o modelo do carro que deseja alugar: ");
   scanf("%s", modelo);
@@ -82,7 +87,12 @@ void alugar_carro() {
   for (int i = 0; i < quantidade_carros; i++) {
     if (!carros[i].alugado && strcmp(carros[i].modelo, modelo) == 0) {
       carros[i].alugado = 1;
-      printf("Carro alugado com sucesso!\n");
+      printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\ndigite 1 para sim ou 0 para não\n",carros[i].aluguel);
+      scanf("%d",&escolha);
+      if(!escolha)
+        printf("O carro não foi alugado -retornando ao menu-\n\n");
+      else
+        printf("O carro foi alugado, parabens -retornando ao menu-\n\n");
       return;
     }
   }
@@ -104,10 +114,10 @@ void apagar_carro() {
     }
   carros = (Carro *) realloc(carros, quantidade_carros * sizeof(Carro));
     if (carros == NULL) {
-        printf("Não foi possível apagar o carro.\n");
+        printf("Não foi possível apagar o carro.\n\n");
         return;
     }
-    printf("Carro apagado com sucesso!\n");
+    printf("Carro apagado com sucesso!\n\n");
     return;
     }
 }
