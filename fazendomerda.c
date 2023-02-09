@@ -130,13 +130,42 @@ int main() {
     return 1;
   }
 
-  while (opcao != 5) {
+  // ATENÇÃO: 
+  // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
+
+  int option;
+  printf("Voce e um comprador ou um vendedor?\n[1]-> Comprador\n[2]-> Vendedor\n[0]-> Nenhum dos dois, entrei na loja por engano.\n");
+  scanf("%d",&option);
+  if(option == 1) {
+    do{
+    printf("Escolha uma opção: \n");
+    printf("[1]-> Exibir carros disponíveis\n");
+    printf("[2]-> Alugar carro\n");
+    printf("[0]-> Encerrar programa\n");
+    scanf("%d", &opcao);
+    switch (opcao) {
+      case 1:
+        exibir_carros();
+        break;
+      case 2:
+        alugar_carro();
+        break;
+      case 0:
+        printf("Ok, volte sempre!\n");
+        break;
+      default:
+        printf("Opção inválida.\n");
+        break;
+    }
+  }while (opcao != 0);
+  }
+  if(option == 2){
+    do {
     printf("Escolha uma opção: \n");
     printf("[1]-> Cadastrar carro\n");
     printf("[2]-> Exibir carros disponíveis\n");
-    printf("[3]-> Alugar carro\n");
-    printf("[4]-> Apagar carro\n");
-    printf("[5]-> Encerrar programa\n");
+    printf("[3]-> Apagar carro\n");
+    printf("[0]-> Encerrar programa\n");
     scanf("%d", &opcao);
 
     switch (opcao) {
@@ -147,17 +176,16 @@ int main() {
         exibir_carros();
         break;
       case 3:
-        alugar_carro();
-        break;
-      case 4:
         apagar_carro();
         break;
-      case 5:
+      case 0:
+        printf("Ok, volte amanha para trabalhar!\n");
         break;
       default:
         printf("Opção inválida.\n");
         break;
     }
+  }while (opcao != 0);
   }
 
   free(carros);
