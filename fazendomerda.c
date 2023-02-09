@@ -46,7 +46,6 @@ void cadastrar_carro() {
   scanf("%s", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
   scanf("%s", carros[quantidade_carros].placa);
-
   printf("Informe o ano do carro: ");
   scanf("%d", &carros[quantidade_carros].ano);
   printf("Informe o valor do carro: ");
