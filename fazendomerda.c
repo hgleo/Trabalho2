@@ -72,7 +72,7 @@ void exibir_carros() {
       printf("Placa: %s\n", carros[i].placa);
       printf("Ano: %d\n", carros[i].ano);
       printf("Valor: %d\n", carros[i].valor);
-      printf("aluguel:\n",carros[i].aluguel);
+      printf("Aluguel: %d\n",carros[i].aluguel);
       printf("\n");
     }
   }
