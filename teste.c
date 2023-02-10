@@ -46,6 +46,7 @@ int cadastrar_carro(Carro** carros, int quantidade_carros) {
   else
     *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
   
+  
   printf("\nDigite a marca do carro: ");
   scanf("%s", carros[quantidade_carros]->marca);
   printf("Informe o modelo do carro: ");
