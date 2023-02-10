@@ -46,20 +46,19 @@ int cadastrar_carro(Carro** carros, int quantidade_carros) {
   else
     *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
   
-  
   printf("\nDigite a marca do carro: ");
-  scanf("%s", carros[quantidade_carros].marca);
+  scanf("%s", carros[quantidade_carros]->marca);
   printf("Informe o modelo do carro: ");
-  scanf("%s", carros[quantidade_carros].modelo);
+  scanf("%s", carros[quantidade_carros]->modelo);
   printf("Informe a placa do carro: ");
-  scanf("%s", carros[quantidade_carros].placa);
+  scanf("%s", carros[quantidade_carros]->placa);
   printf("Informe o ano do carro: ");
-  scanf("%d", &carros[quantidade_carros].ano);
+  scanf("%d", &carros[quantidade_carros]->ano);
   printf("Informe o valor do carro: ");
-  scanf("%d", &carros[quantidade_carros].valor);
+  scanf("%d", &carros[quantidade_carros]->valor);
   printf("Informe o valor do aluguel em reais/mes do carro: ");
-  scanf("%d", &carros[quantidade_carros].aluguel);
-  carros[quantidade_carros].alugado = 0;
+  scanf("%d", &carros[quantidade_carros]->aluguel);
+  carros[quantidade_carros]->alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
 
