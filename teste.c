@@ -31,26 +31,35 @@ typedef struct {
     int alugado;
 } Carro;
 
-int cadastrar_carro(Carro* carros, int quantidade_carros) {
-  if (quantidade_carros == 1) 
-    carros = (Carro *) malloc(quantidade_carros * sizeof(Carro));
+Carro **alocar(int quantidade_carros){
+
+    Carro **carros = (Carro **) malloc (quantidade_carros * sizeof(Carro*));
+    for(int i=0; i < quantidade_carros; i++){
+      carros[i] = (Carro *) malloc (sizeof(Carro));
+    }
+}
+
+int cadastrar_carro(Carro** carros, int quantidade_carros) {
+
+  if (quantidade_carros == 0)
+    *carros = (Carro *) malloc(sizeof(Carro));
   else
-    carros = (Carro *) realloc(carros, (quantidade_carros + 1) * sizeof(Carro));
+    *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
   
   printf("\nDigite a marca do carro: ");
-  scanf("%s", carros[quantidade_carros].marca);
+  scanf("%s", carros[quantidade_carros]->marca);
   printf("Informe o modelo do carro: ");
-  scanf("%s", carros[quantidade_carros].modelo);
+  scanf("%s", carros[quantidade_carros]->modelo);
   printf("Informe a placa do carro: ");
-  scanf("%s", carros[quantidade_carros].placa);
+  scanf("%s", carros[quantidade_carros]->placa);
   printf("Informe o ano do carro: ");
-  scanf("%d", &carros[quantidade_carros].ano);
+  scanf("%d", &carros[quantidade_carros]->ano);
   printf("Informe o valor do carro: ");
-  scanf("%d", &carros[quantidade_carros].valor);
+  scanf("%d", &carros[quantidade_carros]->valor);
   printf("Informe o valor do aluguel em reais/mes do carro: ");
-  scanf("%d", &carros[quantidade_carros].aluguel);
-  carros[quantidade_carros].alugado = 0;
-  //quantidade_carros++;
+  scanf("%d", &carros[quantidade_carros]->aluguel);
+  carros[quantidade_carros]->alugado = 0;
+  quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
 
   return quantidade_carros;
@@ -180,7 +189,6 @@ int main() {
   int opcao = 0, quantidade_carros = 0;
   Carro *carros;
   
-
   // ATENÇÃO: 
   // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
 
@@ -230,8 +238,7 @@ int main() {
 
     switch (opcao) {
       case 1:
-        quantidade_carros++;
-        cadastrar_carro(carros,quantidade_carros);
+        quantidade_carros = cadastrar_carro(&carros,quantidade_carros);
         break;
       case 2:
         exibir_carros(carros,quantidade_carros);
