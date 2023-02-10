@@ -48,18 +48,18 @@ int cadastrar_carro(Carro** carros, int quantidade_carros) {
   
   
   printf("\nDigite a marca do carro: ");
-  scanf("%s", carros[quantidade_carros]->marca);
+  scanf("%s", carros[quantidade_carros].marca);
   printf("Informe o modelo do carro: ");
-  scanf("%s", carros[quantidade_carros]->modelo);
+  scanf("%s", carros[quantidade_carros].modelo);
   printf("Informe a placa do carro: ");
-  scanf("%s", carros[quantidade_carros]->placa);
+  scanf("%s", carros[quantidade_carros].placa);
   printf("Informe o ano do carro: ");
-  scanf("%d", &carros[quantidade_carros]->ano);
+  scanf("%d", &carros[quantidade_carros].ano);
   printf("Informe o valor do carro: ");
-  scanf("%d", &carros[quantidade_carros]->valor);
+  scanf("%d", &carros[quantidade_carros].valor);
   printf("Informe o valor do aluguel em reais/mes do carro: ");
-  scanf("%d", &carros[quantidade_carros]->aluguel);
-  carros[quantidade_carros]->alugado = 0;
+  scanf("%d", &carros[quantidade_carros].aluguel);
+  carros[quantidade_carros].alugado = 0;
   quantidade_carros++;
   printf("Carro cadastrado com sucesso!\n");
 
@@ -166,7 +166,7 @@ void alugar_carro(Carro* carros, int quantidade_carros) {
 
 void apagar_carro(Carro* carros, int quantidade_carros) {
   char modelo[50];
-  printf("Informe o modelo do carro que deseja alugar: ");
+  printf("Informe o modelo do carro que deseja apagar: ");
   scanf("%s", modelo);
 
   for (int i = 0; i < quantidade_carros; i++) {
@@ -232,7 +232,7 @@ int main() {
     printf("[1]-> Cadastrar carro\n");
     printf("[2]-> Exibir carros disponíveis\n");
     printf("[3]-> Pesquisar carros\n");
-    printf("[3]-> Apagar carro\n");
+    printf("[4]-> Apagar carro\n");
     printf("[0]-> Encerrar programa\n");
     printf("[->] ");
     scanf("%d", &opcao);
