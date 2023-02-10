@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <windows.h> // SLEEP
+
 
 // Permissões vendedor
 
@@ -23,33 +23,39 @@
 // dados improvisado, utilizando arquivos
 
 typedef struct veiculo{
-    char marca[50];
+    char marca[20];
+    char modelo[20];
     char placa[7];
     int ano;
     int valor; //99.999.999,99
 }veiculo;
 
 // FUNÇÕES 
-struct veiculo cadastroVeiculo(){
 
-    struct veiculo veiculo;
-    int v;
+veiculo* cadastroVeiculo(){
+
+    veiculo *v;
+
+    v = (veiculo*) malloc(sizeof(veiculo));
+
     printf("\n\n-- CADASTRO DO VEÍCULO --");
-    printf("\nMARCA DO VEÍCULO: ");
-    scanf("%s",veiculo.marca);
-    printf("\nPLACA :");
-    scanf("%s",veiculo.placa);
-    printf("\nANO: ");
-    scanf("%d",&veiculo.ano);
-    while(veiculo.ano < 1850 || veiculo.ano > 2050){
-      printf("\n ANO INVÁLIDO!");
-      printf("\nANO: ");
-      scanf("%d",&veiculo.ano);
+    printf("\nDigite a marca do carro: ");
+    scanf("%s",v->marca);
+    printf("Informe o modelo do carro: ");
+    scanf("%s",v->modelo);
+    printf("Informe a placa do carro: ");
+    scanf("%s",v->placa);
+    printf("Informe o ano do carro: ");
+    scanf("%d",&v->ano);
+    while(v->ano < 1850 || v->ano > 2050){
+      printf("\nAno Inválido!");
+      printf("\nInforme o ano do carro: ");
+      scanf("%d",&v->ano);
     }
-    printf("\nVALOR :");
-    scanf("%d",&veiculo.valor);
+    printf("Informe o valor do carro: ");
+    printf("R$");scanf("%d",&v->valor);
 
-  return veiculo;
+  return v;
 }
 
 void pesquisa(struct veiculo veiculo[], int n){
@@ -72,7 +78,7 @@ void pesquisa(struct veiculo veiculo[], int n){
         }
         if(auxI == 99){
               printf("\nVEÍCULO NÃO FOI ENCONTRADO!\n");
-              Sleep(5000);
+              
         }
     }
     if(n==2){
@@ -90,7 +96,7 @@ void pesquisa(struct veiculo veiculo[], int n){
         }
         if(auxI == 99){
               printf("\nVEÍCULO NÃO FOI ENCONTRADO!\n");
-              Sleep(5000);
+              
         }
 
     }
@@ -110,7 +116,7 @@ void pesquisa(struct veiculo veiculo[], int n){
         }
         if(auxI == 99){
               printf("\nVEÍCULO NÃO FOI ENCONTRADO!\n");
-              Sleep(5000);
+             
         }
 
     }
@@ -121,51 +127,50 @@ void removeVeiculo(){
 void clientes(){
 
 }
-void veiculos(){
-
-}
 
 int main(){
 
   // CRIAR MENU DE INTERAÇÃO DO USUÁRIO COM ACESSO DE VENDEDOR
   // MENUS DIFERENTES PARA OS 2 TIPOS DE ACESSO
 
-  struct veiculo veiculo[100]; // PASSAR ISSO PARA ALOCAÇÃO DINÂMICA
-  int cadastroNum=0;
+  veiculo *p = (veiculo*) malloc(sizeof(veiculo)); // PONTEIRO PARA A STRUCT
+
+  //struct veiculo veiculo[100]; // PASSAR ISSO PARA ALOCAÇÃO DINÂMICA
+  int cadastroNum=0; // NUMERO DE CADASTRO DO CARRO
   int opc = 99; // OPÇÃO PARA O CONTROLE DO MENU
-  char aux[50]; // AUXILIAR DE PESQUISA MARCA/PLACA
+  char aux[20]; // AUXILIAR DE PESQUISA MARCA/PLACA
 
   do{
-    system("cls");
-    printf("[ NOME DO LUGAR INVENTA UM AI ]\n");
-    printf("[1] CADASTRAR VEÍCULO\n");
-    printf("[2] REMOVER VEÍCULO\n");
-    printf("[3] PESQUISAR VEÍCULO\n");
-    printf("[0] SAIR\n");
-    printf("[->]");
+    
+    printf("\n[ NOME DO LUGAR INVENTA UM AI ]");
+    printf("\n[1] Cadastrar Veículo");
+    printf("\n[2] Remover Veículo");
+    printf("\n[3] Pesquisar Veículo");
+    printf("\n[0] Sair\n");
+    printf("\n[->]");
     scanf("%d",&opc);
 
     if(opc == 3){
             //system('cls');
-            printf("\n-- ESCOLHA A OPÇÃO DE PESQUISA --");
-            printf("\n[1] MARCA");
-            printf("\n[2] PLACA");
-            printf("\n[3] ANO");
-            printf("\n[0] RETORNAR AO MENU INICIAL");
+            printf("\n-- Escolha a opção da pesquisa --");
+            printf("\n[1] Marca");
+            printf("\n[2] Placa");
+            printf("\n[3] Ano");
+            printf("\n[0] Retornar ao menu inicial");
             printf("\n[->]");
             scanf("%d",&opc);
 
-            pesquisa(veiculo,opc);
+            pesquisa(p,opc);
     }
 
    switch(opc){
 
     case 1: 
-            system("cls");
-            veiculo[cadastroNum] = cadastroVeiculo();
+            
+            p[cadastroNum] = cadastroVeiculo();
             cadastroNum++;
-            printf("\n\nVEÍCULO CADASTRADO COM SUCESSO!");
-            Sleep(1000);
+            printf("\n\nVEÍCULO CADASTRADO COM SUCESSO!\n");
+            
     break;
 
     case 2:

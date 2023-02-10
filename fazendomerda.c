@@ -130,7 +130,7 @@ int main() {
     return 1;
   }
 
-  while (opcao != 5) {
+  while (opcao != 99) {  //ALTERAR PRA DO{} WHILE{}
     printf("Escolha uma opção: \n");
     printf("[1]-> Cadastrar carro\n");
     printf("[2]-> Exibir carros disponíveis\n");
