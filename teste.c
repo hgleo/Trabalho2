@@ -190,7 +190,7 @@ int main() {
   int opcao = 0, quantidade_carros = 0;
   Carro *carros;
   
-  // ATENÇÃO: 
+  // ATENÇÃO:
   // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
 
   int option;
@@ -257,7 +257,7 @@ int main() {
         apagar_carro(carros,quantidade_carros);
         break;
       case 0:
-        printf("Ok, volte amanha para trabalhar!\n");
+        printf("Volte ao trabalho!!\n");
         break;
       default:
         printf("Opção inválida.\n");
