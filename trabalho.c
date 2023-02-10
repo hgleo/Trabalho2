@@ -174,6 +174,7 @@ int main(){
     break;
 
     case 2:
+    printf("OI");
     break;
 
     case 3:
