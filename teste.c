@@ -194,7 +194,10 @@ int main() {
 
   int option;
   int i;
-  printf("Voce e um comprador ou um vendedor?\n");
+
+do{
+
+  printf("\nVoce e um comprador ou um vendedor?\n");
   printf("[1]-> Comprador\n");
   printf("[2]-> Vendedor\n");
   printf("[0]-> Nenhum dos dois, entrei na loja por engano.\n");
@@ -225,7 +228,7 @@ int main() {
     }
   }while (opcao != 0);
   }
-  if(option == 2){
+  else if(option == 2){
     do {
     printf("\nEscolha uma opção: \n");
     printf("[1]-> Cadastrar carro\n");
@@ -264,6 +267,13 @@ int main() {
     }
   }while (opcao != 0);
   }
+  else if(option == 0){
+    printf("Programa Encerrada!\n");
+  }
+  else{
+    printf("Opcao invalida.\n");
+  }
+}while(option != 0);
 
   free(carros);
   return 0;
