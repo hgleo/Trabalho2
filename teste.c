@@ -19,40 +19,49 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Carro
-{
-  char marca[20];
-  char modelo[20];
-  char placa[7];
-  int valor;
-  int aluguel;
-  int ano;
-  int alugado;
-};
+#define MAX_CARROS 100
 
-void cadastrar_carro(struct Carro*** carros, int* quantidade_carros)
-{
-    *carros = (struct Carro**) realloc(*carros, (*quantidade_carros+1) * sizeof(struct Carro*));
-    // if(carros == NULL){
-    //   printf("Ocorreu um erro. Entre em contato com o administrador. ERRO: 1002\n");
-    //   exit(1);
-    // }
-    (*carros)[*quantidade_carros] = (struct Carro*) malloc(sizeof(struct Carro));
-    
-    printf("\nDigite a marca do carro: ");
-    scanf("%s", (*carros)[*quantidade_carros]->marca);
-    printf("Informe o modelo do carro: ");
-    scanf("%s", (*carros)[*quantidade_carros]->modelo);
-    printf("Informe a placa do carro: ");
-    scanf("%s", (*carros)[*quantidade_carros]->placa);
-    printf("Informe o ano do carro: ");
-    scanf("%d", &(*carros)[*quantidade_carros]->ano);
-    printf("Informe o valor do carro: ");
-    scanf("%d", &(*carros)[*quantidade_carros]->valor);
-    printf("Informe o valor do aluguel em reais/mes do carro: ");
-    scanf("%d", &(*carros)[*quantidade_carros]->aluguel);
-   // (*carros)[*quantidade_carros-1]->alugado = 0;
-    printf("Carro cadastrado com sucesso!\n");
+typedef struct {
+    char marca[20];
+    char modelo[20];
+    char placa[7];
+    int valor;
+    int aluguel;
+    int ano;
+    int alugado;
+} Carro;
+
+Carro **alocar(int quantidade_carros){
+
+    Carro **carros = (Carro **) malloc (quantidade_carros * sizeof(Carro*));
+    for(int i=0; i < quantidade_carros; i++){
+      carros[i] = (Carro *) malloc (sizeof(Carro));
+    }
+}
+
+int cadastrar_carro(Carro** carros, int quantidade_carros) {
+
+  if (quantidade_carros == 0)
+    *carros = (Carro *) malloc(sizeof(Carro));
+  else
+    *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
+  
+  
+  printf("\nDigite a marca do carro: ");
+  scanf("%s", carros[quantidade_carros]->marca);
+  printf("Informe o modelo do carro: ");
+  scanf("%s", carros[quantidade_carros]->modelo);
+  printf("Informe a placa do carro: ");
+  scanf("%s", carros[quantidade_carros]->placa);
+  printf("Informe o ano do carro: ");
+  scanf("%d", &carros[quantidade_carros]->ano);
+  printf("Informe o valor do carro: ");
+  scanf("%d", &carros[quantidade_carros]->valor);
+  printf("Informe o valor do aluguel em reais/mes do carro: ");
+  scanf("%d", &carros[quantidade_carros]->aluguel);
+  carros[quantidade_carros]->alugado = 0;
+  quantidade_carros++;
+  printf("Carro cadastrado com sucesso!\n");
 
     (*quantidade_carros)++;
 }
@@ -198,11 +207,9 @@ void apagar_carro(Carro *carros, int quantidade_carros)
 int main()
 {
   int opcao = 0, quantidade_carros = 0;
+  Carro *carros;
   
-
-  struct Carro** carros = NULL;
-
-  // ATENÇÃO:
+  // ATENÇÃO: 
   // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
 
   int option;
