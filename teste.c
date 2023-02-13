@@ -51,7 +51,7 @@ void cadastrar_carro(struct Carro*** carros, int* quantidade_carros)
     scanf("%d", &(*carros)[*quantidade_carros]->valor);
     printf("Informe o valor do aluguel em reais/mes do carro: ");
     scanf("%d", &(*carros)[*quantidade_carros]->aluguel);
-   (*carros)[*quantidade_carros-1]->alugado = 0;
+   (*carros)[*quantidade_carros]->alugado = 0;
     printf("Carro cadastrado com sucesso!\n");
 
     (*quantidade_carros)++;
@@ -104,7 +104,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo)
 
     for (int i = 0; i < 100; i++)
     {
-      if (strcmp((*carros)[i]->placa, placa) == 0)
+      if ((*carros)[i]->placa == placa)
       {
         printf("Veículo encontrado!\n");
         exibir(carros, i);
@@ -119,7 +119,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo)
 
     for (int i = 0; i < 100; i++)
     {
-      if (strcmp((*carros)[i]->modelo, modelo) == 0)
+      if ((*carros)[i]->modelo == modelo)
       {
         printf("Veículo encontrado!\n");
         exibir(carros, i);
@@ -154,7 +154,7 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros)
 
   for (int i = 0; i < quantidade_carros; i++)
   {
-    if (!(*carros)[i]->alugado && strcmp((*carros)[i]->modelo, modelo) == 0)
+    if (!(*carros)[i]->alugado && (*carros)[i]->modelo == modelo)
     {
       (*carros)[i]->alugado = 1;
       printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\ndigite 1 para sim ou 0 para não\n", (*carros)[i]->aluguel);
@@ -178,7 +178,7 @@ void apagar_carro(struct Carro*** carros, int quantidade_carros)
 
   for (int i = 0; i < quantidade_carros; i++)
   {
-    if (strcmp((*carros)[i]->modelo, modelo) == 0)
+    if ((*carros)[i]->modelo == modelo)
     {
       for (int j = i; j < quantidade_carros - 1; j++)
       {
@@ -227,7 +227,7 @@ int main()
       switch (opcao)
       {
       case 1:
-        exibir_carros(carros, quantidade_carros);
+        exibir_carros(&carros, quantidade_carros);
         break;
       case 2:
         alugar_carro(carros, quantidade_carros);
