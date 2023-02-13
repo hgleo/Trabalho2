@@ -57,10 +57,8 @@ void cadastrar_carro(struct Carro*** carros, int* quantidade_carros)
     (*quantidade_carros)++;
 }
 
-void exibir_carros(struct Carro*** carros, int quantidade_carros)
-{
-  if (quantidade_carros == 0)
-  {
+void exibir_carros(struct Carro*** carros, int quantidade_carros) {
+  if (quantidade_carros == 0 ) {
     printf("Não há carros disponíveis.\n");
     return;
   }
@@ -201,7 +199,9 @@ int main()
 {
   int opcao = 0, quantidade_carros = 0;
   
+
   struct Carro** carros = NULL;
+
   // ATENÇÃO:
   // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
 
@@ -241,19 +241,17 @@ int main()
       }
     } while (opcao != 0);
   }
-  if (option == 2)
-  {
-    do
-    {
-      ///---------------------------------------------------------
-      printf("\nEscolha uma opção: \n");
-      printf("[1]-> Cadastrar carro\n");
-      printf("[2]-> Exibir carros disponíveis\n");
-      printf("[3]-> Pesquisar carros\n");
-      printf("[4]-> Apagar carro\n");
-      printf("[0]-> Encerrar programa\n");
-      printf("[->] ");
-      scanf("%d", &opcao);
+
+  if(option == 2){
+    do {
+    printf("\nEscolha uma opção: \n");
+    printf("[1]-> Cadastrar carro\n");
+    printf("[2]-> Exibir carros disponíveis\n");
+    printf("[3]-> Pesquisar carros\n");
+    printf("[4]-> Apagar carro\n");
+    printf("[0]-> Encerrar programa\n");
+    printf("[->] ");
+    scanf("%d", &opcao);
 
       switch (opcao)
       {
@@ -282,7 +280,7 @@ int main()
         printf("Opção inválida.\n");
         break;
       }
-    } while (opcao != 0);
+    }while (opcao != 0);
   }
   return 0;
-}
+  }
