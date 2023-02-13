@@ -19,55 +19,48 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_CARROS 100
+struct Carro
+{
+  char marca[20];
+  char modelo[20];
+  char placa[7];
+  int valor;
+  int aluguel;
+  int ano;
+  int alugado;
+};
 
-typedef struct {
-    char marca[20];
-    char modelo[20];
-    char placa[7];
-    int valor;
-    int aluguel;
-    int ano;
-    int alugado;
-} Carro;
-
-Carro **alocar(int quantidade_carros){
-
-    Carro **carros = (Carro **) malloc (quantidade_carros * sizeof(Carro*));
-    for(int i=0; i < quantidade_carros; i++){
-      carros[i] = (Carro *) malloc (sizeof(Carro));
-    }
-}
-
-int cadastrar_carro(Carro** carros, int quantidade_carros) {
-
-  if (quantidade_carros == 0)
-    *carros = (Carro *) malloc(sizeof(Carro));
-  else
-    *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
-  
-  
-  printf("\nDigite a marca do carro: ");
-  scanf("%s", carros[quantidade_carros]->marca);
-  printf("Informe o modelo do carro: ");
-  scanf("%s", carros[quantidade_carros]->modelo);
-  printf("Informe a placa do carro: ");
-  scanf("%s", carros[quantidade_carros]->placa);
-  printf("Informe o ano do carro: ");
-  scanf("%d", &carros[quantidade_carros]->ano);
-  printf("Informe o valor do carro: ");
-  scanf("%d", &carros[quantidade_carros]->valor);
-  printf("Informe o valor do aluguel em reais/mes do carro: ");
-  scanf("%d", &carros[quantidade_carros]->aluguel);
-  carros[quantidade_carros]->alugado = 0;
-  quantidade_carros++;
-  printf("Carro cadastrado com sucesso!\n");
+void cadastrar_carro(struct Carro*** carros, int* quantidade_carros)
+{
+    *carros = (struct Carro**) realloc(*carros, (*quantidade_carros+1) * sizeof(struct Carro*));
+    // if(carros == NULL){
+    //   printf("Ocorreu um erro. Entre em contato com o administrador. ERRO: 1002\n");
+    //   exit(1);
+    // }
+    (*carros)[*quantidade_carros] = (struct Carro*) malloc(sizeof(struct Carro));
+    
+    printf("\nDigite a marca do carro: ");
+    scanf("%s", (*carros)[*quantidade_carros]->marca);
+    printf("Informe o modelo do carro: ");
+    scanf("%s", (*carros)[*quantidade_carros]->modelo);
+    printf("Informe a placa do carro: ");
+    scanf("%s", (*carros)[*quantidade_carros]->placa);
+    printf("Informe o ano do carro: ");
+    scanf("%d", &(*carros)[*quantidade_carros]->ano);
+    printf("Informe o valor do carro: ");
+    scanf("%d", &(*carros)[*quantidade_carros]->valor);
+    printf("Informe o valor do aluguel em reais/mes do carro: ");
+    scanf("%d", &(*carros)[*quantidade_carros]->aluguel);
+   // (*carros)[*quantidade_carros-1]->alugado = 0;
+    printf("Carro cadastrado com sucesso!\n");
 
     (*quantidade_carros)++;
 }
 
-void exibir_carros(struct Carro*** carros, int quantidade_carros) {
-  if (quantidade_carros == 0 ) {
+void exibir_carros(struct Carro*** carros, int quantidade_carros)
+{
+  if (quantidade_carros == 0)
+  {
     printf("Não há carros disponíveis.\n");
     return;
   }
@@ -207,9 +200,9 @@ void apagar_carro(Carro *carros, int quantidade_carros)
 int main()
 {
   int opcao = 0, quantidade_carros = 0;
-  Carro *carros;
   
-  // ATENÇÃO: 
+  struct Carro** carros = NULL;
+  // ATENÇÃO:
   // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
 
   int option;
@@ -248,17 +241,19 @@ int main()
       }
     } while (opcao != 0);
   }
-
-  if(option == 2){
-    do {
-    printf("\nEscolha uma opção: \n");
-    printf("[1]-> Cadastrar carro\n");
-    printf("[2]-> Exibir carros disponíveis\n");
-    printf("[3]-> Pesquisar carros\n");
-    printf("[4]-> Apagar carro\n");
-    printf("[0]-> Encerrar programa\n");
-    printf("[->] ");
-    scanf("%d", &opcao);
+  if (option == 2)
+  {
+    do
+    {
+      ///---------------------------------------------------------
+      printf("\nEscolha uma opção: \n");
+      printf("[1]-> Cadastrar carro\n");
+      printf("[2]-> Exibir carros disponíveis\n");
+      printf("[3]-> Pesquisar carros\n");
+      printf("[4]-> Apagar carro\n");
+      printf("[0]-> Encerrar programa\n");
+      printf("[->] ");
+      scanf("%d", &opcao);
 
       switch (opcao)
       {
@@ -287,7 +282,7 @@ int main()
         printf("Opção inválida.\n");
         break;
       }
-    }while (opcao != 0);
+    } while (opcao != 0);
   }
   return 0;
-  }
+}
