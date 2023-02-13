@@ -42,9 +42,9 @@ Carro **alocar(int quantidade_carros){
 int cadastrar_carro(Carro** carros, int quantidade_carros) {
 
   if (quantidade_carros == 0)
-    *carros = (Carro *) malloc(sizeof(Carro));
+    *carros = (struct Carro *) malloc(sizeof(struct Carro));
   else
-    *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
+    *carros = (struct Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
   
   printf("\nDigite a marca do carro: ");
   scanf("%s", carros[quantidade_carros]->marca);
@@ -211,10 +211,10 @@ int main() {
     scanf("%d", &opcao);
     switch (opcao) {
       case 1:
-        exibir_carros(carros,quantidade_carros);
+        exibir_carros(carros, quantidade_carros);
         break;
       case 2:
-        alugar_carro(carros,quantidade_carros);
+        alugar_carro(carros, quantidade_carros);
         break;
       case 0:
         printf("Ok, volte sempre!\n");
