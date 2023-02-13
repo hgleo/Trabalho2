@@ -96,9 +96,9 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
 
     for (int i = 0; i < 100; i++)
     {
-      if ((*carros)[i]->placa == placa)
+      if (strcmp((*carros)[i]->placa, placa) == 0)
       {
-        printf("Veículo encontrado!\n");
+        printf("Veiculo encontrado!\n");
         exibir(carros, i);
       }
     }
@@ -112,13 +112,11 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
 
     for (int i = 0; i < 100; i++)
     {
-      printf("\n\n\nEntrou no loop\n\n\n");
-      if ((*carros)[i]->modelo == modelo)
+      if (strcmp((*carros)[i]->modelo, modelo) == 0)
       {
         printf("Veículo encontrado!\n");
         exibir(carros, i);
       }
-      printf("\n\n\nIgnrou o if\n\n\n");
     }
   }
   if (tipo == 3)
