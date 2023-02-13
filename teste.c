@@ -42,9 +42,9 @@ Carro **alocar(int quantidade_carros){
 int cadastrar_carro(Carro** carros, int quantidade_carros) {
 
   if (quantidade_carros == 0)
-    *carros = (struct Carro *) malloc(sizeof(struct Carro));
+    *carros = (Carro *) malloc(sizeof(Carro));
   else
-    *carros = (struct Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
+    *carros = (Carro *) realloc(*carros, quantidade_carros  * sizeof(Carro));
   
   printf("\nDigite a marca do carro: ");
   scanf("%s", carros[quantidade_carros]->marca);
@@ -194,10 +194,7 @@ int main() {
 
   int option;
   int i;
-
-do{
-
-  printf("\nVoce e um comprador ou um vendedor?\n");
+  printf("Voce e um comprador ou um vendedor?\n");
   printf("[1]-> Comprador\n");
   printf("[2]-> Vendedor\n");
   printf("[0]-> Nenhum dos dois, entrei na loja por engano.\n");
@@ -214,10 +211,10 @@ do{
     scanf("%d", &opcao);
     switch (opcao) {
       case 1:
-        exibir_carros(carros, quantidade_carros);
+        exibir_carros(carros,quantidade_carros);
         break;
       case 2:
-        alugar_carro(carros, quantidade_carros);
+        alugar_carro(carros,quantidade_carros);
         break;
       case 0:
         printf("Ok, volte sempre!\n");
@@ -228,7 +225,7 @@ do{
     }
   }while (opcao != 0);
   }
-  else if(option == 2){
+  if(option == 2){
     do {
     printf("\nEscolha uma opção: \n");
     printf("[1]-> Cadastrar carro\n");
@@ -267,13 +264,6 @@ do{
     }
   }while (opcao != 0);
   }
-  else if(option == 0){
-    printf("Programa Encerrada!\n");
-  }
-  else{
-    printf("Opcao invalida.\n");
-  }
-}while(option != 0);
 
   free(carros);
   return 0;
