@@ -28,7 +28,6 @@ struct Carro{
   int ano;
   int alugado;
 };
-
 void cadastrar_carro(struct Carro*** carros, int* quantidade_carros){
     *carros = (struct Carro**) realloc(*carros, (*quantidade_carros+1) * sizeof(struct Carro*));
     if(carros == NULL){
@@ -88,7 +87,6 @@ void exibir(struct Carro*** carros, int i){
       printf("Aluguel: %d\n", (*carros)[i]->aluguel);
       printf("\n");
 }
-
 void pesquisa_carros(struct Carro*** carros, int tipo){
   char placa[7];
   char modelo[20];
@@ -109,7 +107,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
         return;
       }
   }
-      printf("Placa nao encontrada!\n");
+      printf("Placa não encontrada!\n");
     }
 
   if (tipo == 2)
@@ -127,7 +125,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
         return;
       }
     }
-    printf("Modelo nao encontrado!\n");
+    printf("Modelo não encontrado!\n");
   }
 
   if (tipo == 3)
@@ -145,7 +143,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
         return;
       }
     }
-    printf("Carro de ano %d nao encontrado!\n", ano);
+    printf("Carro de ano %d não encontrado!\n", ano);
   }
 }
 void alugar_carro(struct Carro*** carros, int quantidade_carros){
@@ -161,12 +159,12 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros){
     if (!(*carros)[i]->alugado && strcmp((*carros)[i]->modelo, modelo) == 0)
     {
       (*carros)[i]->alugado = 1;
-      printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\ndigite 1 para sim ou 0 para não\n", (*carros)[i]->aluguel);
+      printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\nDigite [1] para sim ou [0] para não\n", (*carros)[i]->aluguel);
       scanf("%d", &escolha);
       if (!escolha)
         printf("O carro não foi alugado - retornando ao  -\n\n");
       else
-        printf("O carro foi alugado, parabens - retornando ao menu -\n\n");
+        printf("O carro foi alugado, parabéns - retornando ao menu -\n\n");
       return;
     }
   }
@@ -195,6 +193,32 @@ void apagar_carro(struct Carro*** carros, int *quantidade_carros){
   }
     return;
 }
+int particionar(struct Carro** carros, int esquerda, int direita) {
+  int pivo = carros[direita]->ano;
+  int i = esquerda - 1;
+  struct Carro* temp;
+
+  for (int j = esquerda; j <= direita - 1; j++) {
+    if (carros[j]->ano < pivo) {
+      i++;
+      temp = carros[i];
+      carros[i] = carros[j];
+      carros[j] = temp;
+    }
+  }
+  temp = carros[i + 1];
+  carros[i + 1] = carros[direita];
+  carros[direita] = temp;
+
+  return i + 1;
+}
+void quickSort(struct Carro** carros, int esquerda, int direita) {
+  if (esquerda < direita) {
+    int indice_pivo = particionar(carros, esquerda, direita);
+    quickSort(carros, esquerda, indice_pivo - 1);
+    quickSort(carros, indice_pivo + 1, direita);
+  }
+}
 int main(){
   int opcao = 99, quantidade_carros = 0;
   
@@ -205,7 +229,7 @@ int main(){
   int option = 99;
   int i;
   do{
-    printf("\nVoce e um comprador ou um vendedor?\n");
+    printf("\nVoce é um comprador ou um vendedor?\n");
     printf("[1]-> Comprador\n");
     printf("[2]-> Vendedor\n");
     printf("[0]-> Encerrar o programa.\n");
@@ -248,6 +272,7 @@ int main(){
       printf("[2]-> Exibir carros disponíveis\n");
       printf("[3]-> Pesquisar carros\n");
       printf("[4]-> Apagar carro\n");
+      printf("[5]-> Ordenar Valores\n");
       printf("[0]-> Retornar ao menu inicial\n");
       printf("[->] ");
       scanf("%d", &opcao);
@@ -272,6 +297,9 @@ int main(){
       case 4:
         apagar_carro(&carros, &quantidade_carros);
         break;
+      case 5: 
+        // IMPLEMENTA AI FUUDIDO
+      break;
       case 0:
         break;
       default:
