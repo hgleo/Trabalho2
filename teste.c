@@ -103,12 +103,12 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
       }
     }
   }
+
   if (tipo == 2)
   { // PESQUISA PELO MODELO
 
     printf("\nDigite o modelo do veículo a ser pesquisado: ");
     scanf("%s", modelo);
-    printf("\n\n\nN entrou no loop\n\n\n");
 
     for (int i = 0; i < 100; i++)
     {
@@ -119,6 +119,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
       }
     }
   }
+
   if (tipo == 3)
   { // PESQUISA PELO ANO
 
@@ -145,7 +146,7 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros){
 
   for (int i = 0; i < quantidade_carros; i++)
   {
-    if (!(*carros)[i]->alugado && (*carros)[i]->modelo == modelo)
+    if (!(*carros)[i]->alugado && strcmp((*carros)[i]->modelo, modelo) == 0)
     {
       (*carros)[i]->alugado = 1;
       printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\ndigite 1 para sim ou 0 para não\n", (*carros)[i]->aluguel);
@@ -167,7 +168,7 @@ void apagar_carro(struct Carro*** carros, int quantidade_carros){
 
   for (int i = 0; i < quantidade_carros; i++)
   {
-    if ((*carros)[i]->modelo == modelo)
+    if (strcmp((*carros)[i]->modelo, modelo) == 0)
     {
       for (int j = i; j < quantidade_carros - 1; j++)
       {
