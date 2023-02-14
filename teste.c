@@ -14,6 +14,12 @@ struct Carro{
   int ano;
   int alugado;
 };
+void liberar_memoria(struct Carro*** carros, int quantidade_carros) {
+     for (int i = 0; i < quantidade_carros; i++) {
+        free((*carros)[i]);
+    }
+    free(*carros);
+}
 void cadastrar_carro(struct Carro*** carros, int* quantidade_carros){
     *carros = (struct Carro**) realloc(*carros, (*quantidade_carros+1) * sizeof(struct Carro*));
     if(carros == NULL){
@@ -188,7 +194,6 @@ void apagar_carro(struct Carro*** carros, int *quantidade_carros){
   {
     if (strcmp((*carros)[i]->placa, placa) == 0)
     {
-      //free(*(carros)[i]);
       for (int j = i; j < *quantidade_carros - 1; j++)
       {
         (*carros)[j] = (*carros)[j + 1];
@@ -339,6 +344,6 @@ else{
 }
 
   fclose(saida);
-  free(carros);
+  liberar_memoria(&carros, quantidade_carros);
   return 0;
 }
