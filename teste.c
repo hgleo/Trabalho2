@@ -49,7 +49,6 @@ void cadastrar_carro(struct Carro*** carros, int* quantidade_carros){
     scanf("%d", &(*carros)[*quantidade_carros]->valor);
     printf("Informe o valor do aluguel em reais/mes do carro: ");
     scanf("%d", &(*carros)[*quantidade_carros]->aluguel);
-   //(*carros)[*quantidade_carros]->alugado = 0;
     printf("Carro cadastrado com sucesso!\n");
 
     (*quantidade_carros)++;
@@ -83,6 +82,7 @@ void exibir(struct Carro*** carros, int i){
       printf("Aluguel: %d\n", (*carros)[i]->aluguel);
       printf("\n");
 }
+
 void pesquisa_carros(struct Carro*** carros, int tipo){
   char placa[7];
   char modelo[20];
@@ -100,8 +100,10 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
       {
         printf("Veiculo encontrado!\n");
         exibir(carros, i);
+        return;
       }
   }
+      printf("Placa nao encontrada!\n");
     }
 
   if (tipo == 2)
@@ -116,8 +118,10 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
       {
         printf("Veículo encontrado!\n");
         exibir(carros, i);
+        return;
       }
     }
+    printf("Modelo nao encontrado!\n");
   }
 
   if (tipo == 3)
@@ -132,8 +136,10 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
       {
         printf("Veículo encontrado!\n");
         exibir(carros, i);
+        return;
       }
     }
+    printf("Carro de ano %d nao encontrado!\n", ano);
   }
 }
 void alugar_carro(struct Carro*** carros, int quantidade_carros){
@@ -162,29 +168,25 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros){
   printf("Não foi possível alugar o carro informado.\n");
 }
 void apagar_carro(struct Carro*** carros, int *quantidade_carros){
-  char modelo[50];
-  printf("Informe o modelo do carro que deseja apagar: ");
-  scanf("%s", modelo);
+  char placa[50];
+  printf("Informe a placa do carro que deseja apagar: ");
+  scanf("%s", placa);
 
   for (int i = 0; i < *quantidade_carros; i++)
   {
-    if (strcmp((*carros)[i]->modelo, modelo) == 0)
+    if (strcmp((*carros)[i]->placa, placa) == 0)
     {
+      free(*(carros)[i]);
       for (int j = i; j < *quantidade_carros - 1; j++)
       {
         carros[j] = carros[j + 1];
       }
-      (*quantidade_carros)--;
     }
-    *carros = (struct Carro**) realloc(*carros, (*quantidade_carros) * sizeof(struct Carro*));
-    if (carros == NULL)
-    {
-      printf("Não foi possível apagar o carro.\n\n");
-      return;
-    }
+    *carros = (struct Carro**) realloc(*carros, (*quantidade_carros - 1) * sizeof(struct Carro*));
+    (*quantidade_carros)--;
     printf("Carro apagado com sucesso!\n\n");
-    return;
   }
+    return;
 }
 int main(){
   int opcao = 0, quantidade_carros = 0;
@@ -258,7 +260,7 @@ int main(){
         printf("[3]-> Pesquisa pelo Ano\n");
         printf("[->] ");
         scanf("%d", &i);
-        pesquisa_carros(&carros, i);
+        pesquisa_carros(&carros, quantidade_carros);
         break;
       case 4:
         apagar_carro(&carros, &quantidade_carros);
