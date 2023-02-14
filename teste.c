@@ -1,20 +1,6 @@
-// Permissões vendedor
-
-//     Alocar quantidade de vagas na garagem;
-//     Realocar quantidade de vagas;
-//     Cadastrar novo carro; <- TÁ FEITO
-//     Precisará de algumas informações: preço, modelo, marca, ano, etc. <- QUISER BOTAR MAIS COLOCA
-//     Pesquisar veículo <- AJUSTAR O TOUPPER PARA PESQUISAR TUDO EM MAIÚSCULO
-//     Remover carro; <- FUNÇÃO QUE LIBERA A MEMÓRIA DE TODOS OS PONTEIROS + O DA STRUCT
-//     Checar quantidade de clientes, e seus nomes;
-//     Permissões comprador:
-//     Comprar carro;
-//     Alugar carro;
-//     Ir embora (Encerra Programa); <- TÁ FEITO
-
-// O sistema de identificação (vendedor ou comprador), será administrado por base de um banco de
-// dados improvisado, utilizando arquivos
-
+/*
+Este é um programa em C que implementa um sistema básico de aluguel de carros. O programa permite ao usuário cadastrar carros, listar carros disponíveis, pesquisar carros por placa, modelo ou ano e alugar carros. O programa armazena as informações do carro em uma variedade de estruturas. Cada estrutura representa um carro e contém os seguintes campos: marca, modelo, placa, valor, valor do aluguel, ano e bandeira alugada. O programa é escrito em C e pode ser compilado e executado em um terminal.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
