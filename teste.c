@@ -93,7 +93,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
   int ano;
 
   if (tipo == 1)
-  { // PESQUISA PELA PLACA
+  {
 
     printf("\nDigite a placa do veículo a ser pesquisado: ");
     scanf("%s", placa);
@@ -111,7 +111,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
     }
 
   if (tipo == 2)
-  { // PESQUISA PELO MODELO
+  {
 
     printf("\nDigite o modelo do veículo a ser pesquisado: ");
     scanf("%s", modelo);
@@ -129,7 +129,7 @@ void pesquisa_carros(struct Carro*** carros, int tipo){
   }
 
   if (tipo == 3)
-  { // PESQUISA PELO ANO
+  {
 
     printf("\nDigite o ano do veículo a ser pesquisado: ");
     scanf("%d", &ano);
@@ -245,8 +245,6 @@ int main(){
   int opcao = 99, quantidade_carros = 0;
   
   struct Carro** carros = NULL;
-  // ATENÇÃO:
-  // FALTA AINDA FAZER UMA FORMA DE VOLTAR PARA A ESCOLHA COMPRADOR/VENDEDOR, UMA VEZ QUE ESCOLHIDA NAO TEM VOLTA
 
   int option = 99;
   int i;
@@ -343,8 +341,9 @@ if (saida == NULL){
   printf("ERROR: erro ao abrir %s\n", "carros_sobrando.txt");
 }
 else{
+  fprintf(saida, "CARROS QUE AINDA NAO FORAM DEVOLVIDOS:\n");
   for(int i = 0; i < quantidade_carros; i++){
-    if(carros[i]->alugado == 0){
+    if(carros[i]->alugado == 1){
       fprintf(saida, "MARCA: %s |\t", carros[i]->marca);
       fprintf(saida, "MODELO: %s |\t", carros[i]->modelo);
       fprintf(saida, "PLACA: %s |\t", carros[i]->placa);
@@ -354,5 +353,6 @@ else{
 }
 
   fclose(saida);
+  free(carros);
   return 0;
 }
