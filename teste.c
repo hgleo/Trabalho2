@@ -171,6 +171,28 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros){
 
   printf("Não foi possível alugar o carro informado.\n");
 }
+void devolver_carro(struct Carro*** carros, int quantidade_carros){
+char placa[7];printf("\nDigite a placa do carro que deseja devolver: ");
+scanf("%s", placa);
+
+for (int i = 0; i < quantidade_carros; i++){
+    if (strcmp((*carros)[i]->placa, placa) == 0)
+    {
+        if ((*carros)[i]->alugado == 1)
+        {
+            (*carros)[i]->alugado = 0;
+            printf("\nCarro de placa %s devolvido com sucesso!\n", placa);
+            return;
+        }
+        else
+        {
+            printf("\nO carro de placa %s não está alugado.\n", placa);
+            return;
+        }
+    }
+}
+printf("\nCarro de placa %s não encontrado.\n", placa);
+}
 void apagar_carro(struct Carro*** carros, int *quantidade_carros){
   char placa[50];
   printf("Informe a placa do carro que deseja apagar: ");
@@ -235,6 +257,7 @@ int main(){
     printf("[0]-> Encerrar o programa.\n");
     printf("[->] ");
     scanf("%d", &option);
+    system("cls");
 
   if (option == 1)
   {
@@ -243,9 +266,11 @@ int main(){
       printf("\nEscolha uma opção: \n");
       printf("[1]-> Exibir carros disponíveis\n");
       printf("[2]-> Alugar carro\n");
+      printf("[3]-> Devolver carro\n");
       printf("[0]-> Retornar ao menu inicial\n");
       printf("[->] ");
       scanf("%d", &opcao);
+      system("cls");
       switch (opcao)
       {
       case 1:
@@ -254,6 +279,9 @@ int main(){
       case 2:
         alugar_carro(&carros, quantidade_carros);
         break;
+      case 3: 
+        
+      break;
       case 0:
         break;
       default:
@@ -275,6 +303,7 @@ int main(){
       printf("[0]-> Retornar ao menu inicial\n");
       printf("[->] ");
       scanf("%d", &opcao);
+      system("cls");
 
       switch (opcao)
       {
@@ -325,6 +354,5 @@ else{
 }
 
   fclose(saida);
-
   return 0;
-  }
+}
