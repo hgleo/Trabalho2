@@ -194,12 +194,12 @@ void apagar_carro(struct Carro*** carros, int *quantidade_carros){
     return;
 }
 int particionar(struct Carro** carros, int esquerda, int direita) {
-  int pivo = carros[direita]->ano;
+  int pivo = carros[direita]->valor;
   int i = esquerda - 1;
   struct Carro* temp;
 
   for (int j = esquerda; j <= direita - 1; j++) {
-    if (carros[j]->ano < pivo) {
+    if (carros[j]->valor < pivo) {
       i++;
       temp = carros[i];
       carros[i] = carros[j];
@@ -272,7 +272,6 @@ int main(){
       printf("[2]-> Exibir carros disponíveis\n");
       printf("[3]-> Pesquisar carros\n");
       printf("[4]-> Apagar carro\n");
-      printf("[5]-> Ordenar Valores\n");
       printf("[0]-> Retornar ao menu inicial\n");
       printf("[->] ");
       scanf("%d", &opcao);
@@ -297,9 +296,6 @@ int main(){
       case 4:
         apagar_carro(&carros, &quantidade_carros);
         break;
-      case 5: 
-        // IMPLEMENTA AI FUUDIDO
-      break;
       case 0:
         break;
       default:
@@ -309,4 +305,26 @@ int main(){
     } while (opcao != 0);
   }
   }while(option!=0);
+
+// ARQUIVOS -- CRIARÁ UM ARQUIVO E IMPRIMIRÁ OS CARROS QUE NÃO FORAM ALUGADOS DURANTE A EXECUÇÃO DO PROGRAMA (ESTARÃO ORDENADOS POR PREÇO)
+
+quickSort(carros, 0, quantidade_carros - 1);
+FILE *saida = fopen("carros_sobrando.txt", "w");
+if (saida == NULL){
+  printf("ERROR: erro ao abrir %s\n", "carros_sobrando.txt");
 }
+else{
+  for(int i = 0; i < quantidade_carros; i++){
+    if(carros[i]->alugado == 0){
+      fprintf(saida, "MARCA: %s |\t", carros[i]->marca);
+      fprintf(saida, "MODELO: %s |\t", carros[i]->modelo);
+      fprintf(saida, "PLACA: %s |\t", carros[i]->placa);
+      fprintf(saida, "VALOR: %d \t\n", carros[i]->valor);
+    }
+  }
+}
+
+  fclose(saida);
+
+  return 0;
+  }
