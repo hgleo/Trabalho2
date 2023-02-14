@@ -280,7 +280,7 @@ int main(){
         alugar_carro(&carros, quantidade_carros);
         break;
       case 3: 
-        
+        devolver_carro(&carros, quantidade_carros);
       break;
       case 0:
         break;
