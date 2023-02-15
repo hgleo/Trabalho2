@@ -153,7 +153,7 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros){
       printf("O aluguel deste carro custa %d Reais/mes, deseja prosseguir?\nDigite [1] para sim ou [0] para não\n", (*carros)[i]->aluguel);
       scanf("%d", &escolha);
       if (!escolha)
-        printf("O carro não foi alugado - retornando ao  -\n\n");
+        printf("O carro não foi alugado - retornando ao menu -\n\n");
       else
         (*carros)[i]->alugado = 1;
         printf("O carro foi alugado, parabéns - retornando ao menu -\n\n");
