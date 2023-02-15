@@ -164,10 +164,10 @@ void alugar_carro(struct Carro*** carros, int quantidade_carros){
   printf("Não foi possível alugar o carro informado.\n");
 }
 void devolver_carro(struct Carro*** carros, int quantidade_carros){
-char placa[7];printf("\nDigite a placa do carro que deseja devolver: ");
-scanf("%s", placa);
+  char placa[7];printf("\nDigite a placa do carro que deseja devolver: ");
+  scanf("%s", placa);
 
-for (int i = 0; i < quantidade_carros; i++){
+  for (int i = 0; i < quantidade_carros; i++){
     if (strcmp((*carros)[i]->placa, placa) == 0)
     {
         if ((*carros)[i]->alugado == 1)
@@ -182,8 +182,8 @@ for (int i = 0; i < quantidade_carros; i++){
             return;
         }
     }
-}
-printf("\nCarro de placa %s não encontrado.\n", placa);
+  }
+  printf("\nCarro de placa %s não encontrado.\n", placa);
 }
 void apagar_carro(struct Carro*** carros, int *quantidade_carros){
   char placa[50];
@@ -309,7 +309,7 @@ int main(){
         printf("[3]-> Pesquisa pelo Ano\n");
         printf("[->] ");
         scanf("%d", &i);
-        pesquisa_carros(&carros, quantidade_carros);
+        pesquisa_carros(&carros, i); 
         break;
       case 4:
         apagar_carro(&carros, &quantidade_carros);
@@ -324,24 +324,24 @@ int main(){
   }
   }while(option!=0);
 
-// ARQUIVOS -- CRIARÁ UM ARQUIVO E IMPRIMIRÁ OS CARROS QUE NÃO FORAM ALUGADOS DURANTE A EXECUÇÃO DO PROGRAMA (ESTARÃO ORDENADOS POR PREÇO)
+  // ARQUIVOS -- CRIARÁ UM ARQUIVO E IMPRIMIRÁ OS CARROS QUE NÃO FORAM ALUGADOS DURANTE A EXECUÇÃO DO PROGRAMA (ESTARÃO ORDENADOS POR PREÇO)
 
-quickSort(carros, 0, quantidade_carros - 1);
-FILE *saida = fopen("carros_sobrando.txt", "w");
-if (saida == NULL){
-  printf("ERROR: erro ao abrir %s\n", "carros_sobrando.txt");
-}
-else{
-  fprintf(saida, "CARROS QUE AINDA NAO FORAM DEVOLVIDOS:\n");
-  for(int i = 0; i < quantidade_carros; i++){
-    if(carros[i]->alugado == 1){
+  quickSort(carros, 0, quantidade_carros - 1);
+  FILE *saida = fopen("carros_sobrando.txt", "w");
+  if (saida == NULL){
+    printf("ERROR: erro ao abrir %s\n", "carros_sobrando.txt");
+  }
+  else{
+    fprintf(saida, "CARROS QUE AINDA NAO FORAM DEVOLVIDOS:\n");
+    for(int i = 0; i < quantidade_carros; i++){
+      if(carros[i]->alugado == 1){
       fprintf(saida, "MARCA: %s |\t", carros[i]->marca);
       fprintf(saida, "MODELO: %s |\t", carros[i]->modelo);
       fprintf(saida, "PLACA: %s |\t", carros[i]->placa);
       fprintf(saida, "VALOR: %d \t\n", carros[i]->valor);
     }
   }
-}
+  }
 
   fclose(saida);
   liberar_memoria(&carros, quantidade_carros);
