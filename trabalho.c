@@ -232,7 +232,7 @@ void quickSort(struct Carro** carros, int esquerda, int direita) {
     quickSort(carros, indice_pivo + 1, direita);
   }
 }
-int main(){
+int main(){                   
   int opcao = 99, quantidade_carros = 0;
   
   struct Carro** carros = NULL;
@@ -246,7 +246,7 @@ int main(){
     printf("[0]-> Encerrar o programa.\n");
     printf("[->] ");
     scanf("%d", &option);
-    system("cls");
+    system("clear");
 
   if (option == 1)
   {
@@ -259,7 +259,7 @@ int main(){
       printf("[0]-> Retornar ao menu inicial\n");
       printf("[->] ");
       scanf("%d", &opcao);
-      system("cls");
+      system("clear");
       switch (opcao)
       {
       case 1:
@@ -279,7 +279,7 @@ int main(){
       }
     } while (opcao != 0);
   }
-  if (option == 2)
+  if (option == 2)  
   {
     do
     {
@@ -292,7 +292,7 @@ int main(){
       printf("[0]-> Retornar ao menu inicial\n");
       printf("[->] ");
       scanf("%d", &opcao);
-      system("cls");
+      system("clear");
 
       switch (opcao)
       {
