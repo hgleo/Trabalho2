@@ -19,7 +19,8 @@ O programa iniciará perguntando se você é comprador ou vendedor, dependendo d
 - Remover carro;
 - Listar Carros
 - Procurar Carro
-- Permissões comprador:
+
+## Permissões comprador:
 - Lista carros;
 - Alugar carro;
 - Devolve carro;
