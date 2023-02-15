@@ -309,7 +309,7 @@ int main(){
         printf("[3]-> Pesquisa pelo Ano\n");
         printf("[->] ");
         scanf("%d", &i);
-        pesquisa_carros(&carros, quantidade_carros);
+        pesquisa_carros(&carros, i);
         break;
       case 4:
         apagar_carro(&carros, &quantidade_carros);
