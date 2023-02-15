@@ -16,11 +16,10 @@ O programa iniciará perguntando se você é comprador ou vendedor, dependendo d
 - Ir embora (Encerra Programa);
 
  O sistema de identificação (vendedor ou comprador), será administrado por base de um banco de dados improvisado, utilizando arquivos
+## Requisitos
 
-- ## Requisitos
-
-  - Matriz:
-  - Matriz de structs (informações dos carros).
-  - Vetor:
-  - Ordenação:
-  - Ordenar carros por preço, ordenar clientes por ordem alfabética,   ordenar por função (viagem, trabalho, etc)
+- Matriz:
+- Matriz de structs (informações dos carros).
+- Vetor:
+- Ordenação:
+- Ordenar carros por preço, ordenar clientes por ordem alfabética,   ordenar por função (viagem, trabalho, etc)
